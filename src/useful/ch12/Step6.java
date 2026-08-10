@@ -40,13 +40,11 @@ public class Step6 {
         long dday = ChronoUnit.DAYS.between(today, christmas);
         System.out.println("크리스마스까지: " + dday + "일");
 
-
         // 5. 원하는 형식으로 출력
         // a  : 오전/오후  (Locale.KOREAN이 있어야 한글로 나온다)
         // hh : 12시간제, 두 자리 (HH는 24시간제라 14로 나옴)
         // mm : 분  (MM은 월이므로 절대 혼동 금지)
-        DateTimeFormatter fmt =
-                DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 a hh시 mm분", Locale.KOREAN);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 a hh시 mm분", Locale.KOREAN);
         System.out.println("현재: " + now.format(fmt));
 
     } // end of main
