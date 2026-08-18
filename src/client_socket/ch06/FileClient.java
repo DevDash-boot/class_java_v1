@@ -20,11 +20,11 @@ public class FileClient {
         Scanner sc = new Scanner(System.in);
         System.out.println("전송할 파일 경로 예) C:\\work_java\\test.txt");
         // String filePath = sc.nextLine();
-        String filePath = "C:\\jhg\\work_space\\java_class_1\\assets\\a.txt";
+        String filePath = "C:\\jhg\\work_space\\class_java_v1\\assets\\a.txt";
 
         File file = new File(filePath);
         if (!file.exists() || !file.isFile()) {
-            System.out.println("파일이 존재하지 않거나 폴더 경로 입니다. : " + filePath);
+            System.out.println("파일이 존재하지 않거나 다른 폴더 경로 입니다. : " + filePath);
             return;
         }
 
