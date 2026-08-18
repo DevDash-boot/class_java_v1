@@ -19,7 +19,7 @@ public class MultiThreadServer3 {
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader keyboardReader = new BufferedReader(new InputStreamReader(System.in));
 
-            // 읽기 쓰레드 : 클라이언트에서 온 메시지만 수신
+            // 읽기 스레드 : 클라이언트에서 온 메시지만 수신
             Thread readThread = new Thread(() -> {
                 String clientMessage;
                 try {
@@ -29,7 +29,8 @@ public class MultiThreadServer3 {
                             System.out.println("클라이언트가 종료했습니다.");
                             break;
                         }
-                        if("ㅠㅠ".equalsIgnoreCase(clientMessage)){
+                        // 클라이언트 측에서 ㅠㅠ를 입력하면 서버 콘솔창에서는 이모티콘 출력됨
+                        if ("ㅠㅠ".equalsIgnoreCase(clientMessage)) {
                             System.out.println("😭");    // 메시지 보내기
                             continue;
                         }
@@ -56,8 +57,9 @@ public class MultiThreadServer3 {
                                 System.out.println("서버가 종료했습니다.");
                                 break;
                             }
-                            if("ㅠㅠ".equalsIgnoreCase(serverMessage)){
-                                writer.println(serverMessage);
+
+                            if ("ㅠㅠ".equalsIgnoreCase(serverMessage)) {
+                                writer.println("[Server] 응답 메시지 : 😭 ");
                                 continue;
                             }
                             writer.println("[Server] 응답 메시지 : " + serverMessage);

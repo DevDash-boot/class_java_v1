@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class MultiThreadClient3 {
+public class MultiThreadClient4 {
     public static void main(String[] args) {
         // 1. 소켓 준비(서버 측 IP 주소, 포트 번호)
         try (Socket socket = new Socket("localhost", 5001)) {
@@ -16,7 +16,7 @@ public class MultiThreadClient3 {
 
             // 2. 입력 / 출력 / 키보드 스트림
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(),true);
             BufferedReader keyboardReader = new BufferedReader(new InputStreamReader(System.in));
 
             // 3. 읽기 쓰레드
@@ -24,17 +24,16 @@ public class MultiThreadClient3 {
                 String serverMessage;
                 try {
                     while ((serverMessage = reader.readLine()) != null) {
-                        // 서버 측
+
                         if ("exit".equalsIgnoreCase(serverMessage)) {
                             System.out.println("서버가 종료했습니다.");
                             break;
                         }
-                        // 서버 측에서 ㅠㅠ를 입력하면 클라이언트 콘솔창에서는 이모티콘 출력됨
-                        if ("ㅠㅠ".equalsIgnoreCase(serverMessage)) {
+                        if("ㅠㅠ".equalsIgnoreCase(serverMessage)){
                             System.out.println("😭");
                             continue;
                         }
-                        System.out.println(serverMessage);
+                        System.out.println( serverMessage);
                         if ("clean".equalsIgnoreCase(serverMessage)) {
                             System.out.print("\n".repeat(10));
                             System.out.println("=============== 채팅 청소 ===============");
@@ -57,9 +56,8 @@ public class MultiThreadClient3 {
                                 System.out.println("클라이언트가 종료했습니다.");
                                 break;
                             }
-
-                            if ("ㅠㅠ".equalsIgnoreCase(clientMessage)) {
-                                writer.println("[Client] 응답 메시지 : 😭" );
+                            if("ㅠㅠ".equalsIgnoreCase(clientMessage)){
+                                writer.println(clientMessage);
                                 continue;
                             }
                             writer.println("[Client] 응답 메시지 : " + clientMessage);

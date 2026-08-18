@@ -1,39 +1,29 @@
-package socket.ch05;
+package client_socket.ch05_1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 
-public abstract class AbstractServer {
+public abstract class AbstractClient {
     private String name;
-    private ServerSocket serverSocket;
     private Socket socket;
     private PrintWriter socketWriterStream;
     private BufferedReader socketReaderStream;
     private BufferedReader keyboardReaderStream;
 
-    public AbstractServer(String name) {
+    public AbstractClient(String name) {
         this.name = name;
-    }
-
-    public void setServerSocket(ServerSocket serverSocket) {
-        this.serverSocket = serverSocket;
     }
 
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
 
-    public ServerSocket getServerSocket() {
-        return serverSocket;
-    }
-
     public final void run() {
         try {
-            connectToClient();
+            connectToServer();
             setupStreams();
             startCommunication();
         } catch (Exception e) {
@@ -49,7 +39,7 @@ public abstract class AbstractServer {
         }
     }
 
-    protected abstract void connectToClient();
+    protected abstract void connectToServer();
 
     private void setupStreams() throws IOException {
         socketWriterStream = new PrintWriter(socket.getOutputStream(), true);
@@ -80,7 +70,7 @@ public abstract class AbstractServer {
                     }
                 }
             } catch (Exception e) {
-                System.err.println("클라이언트와의 연결이 끊겼습니다.");
+                System.err.println("서버와의 연결이 끊겼습니다.");
             }
         });
 
@@ -100,7 +90,7 @@ public abstract class AbstractServer {
                         socketWriterStream.println("[" + name + "] 응답 메시지 : 🖐️");
                     } else if ("exit".equalsIgnoreCase(input)) {
                         socketWriterStream.println("exit");
-                        System.out.println("서버가 종료했습니다.");
+                        System.out.println("클라이언트가 종료했습니다.");
                         break;
                     } else {
                         socketWriterStream.println("[" + name + "] " + input);
