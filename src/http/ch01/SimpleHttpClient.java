@@ -38,7 +38,7 @@ public class SimpleHttpClient {
             System.out.println("응답 코드(HTTP 상태 코드) : " + responseCode);
 
             // 방어적 코드
-            if(responseCode != 200){
+            if (responseCode != 200) {
                 // 실패 응답의 본문은 getInputStream()이 아니라 getErrorStream()으로 읽어야 한다.
                 System.out.println("요청 실패!");
                 return;
@@ -50,7 +50,7 @@ public class SimpleHttpClient {
                 StringBuilder response = new StringBuilder();  // 단일 스레드에서는 StringBuilder 사용
                 String line;
 
-                while((line = reader.readLine())!=null){
+                while ((line = reader.readLine()) != null) {
                     response.append(line).append("\n"); // 두 번째 append는 한 줄 읽을 때마다 한 줄 띄움
                 }
                 System.out.println("[응답 내용]");
@@ -61,11 +61,11 @@ public class SimpleHttpClient {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             // 6단계 : 연결 종료
             // HttpURLConnection() : 예전에 만든 녀석이라 try-with-resources 를 사용할 수 없음
             // 문법적으로는 인터페이스 Closeable을 구현하지 않아서 사용할 수 없음
-            if(connection != null){
+            if (connection != null) {
                 connection.disconnect();    // 연결 끊기
             }
         }
