@@ -31,7 +31,6 @@ import java.util.concurrent.Executors;
  * HttpExchange는 그 바이트를 HTTP 규칙대로 해석해 둔 결과까지 들고옴.
  */
 
-
 public class SimpleHttpServer {
     private static final int PORT = 8080;
     private static final int THREAD_POOL_SIZE = 10; // 미리 생성해두는 스레드 개수를 의미
@@ -55,7 +54,6 @@ public class SimpleHttpServer {
          * 두 번째 인자 : 블로킹, 대기 큐 크기
          * 서버가 아직 처리하지 못한 연결이 줄 서서 기다리는 자리 수다.
          * 0이나 음수를 주면 현재 코드에서는 아마 내부적으로 기본값 50으로 바꿔서 처리를 한다.
-         *
          */
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
 
@@ -72,6 +70,10 @@ public class SimpleHttpServer {
         server.createContext("/health", new HealthHandler());
         // 접근 경로 예시 : http://localhost:8080/api/users
         server.createContext("/api/users", new UserApiHandler());
+        // 접근 경로 예시 : http://localhost:8080/api/time
+        server.createContext("/api/time", new TimeHandler());
+        // 접근 경로 예시 : http://localhost:8080/api/h11
+        server.createContext("/api/h11", new H11Handler());
 
         // 3. 요청을 처리할 스레드 풀 지정 (http 서버는 멀티 스레드 프로그램이라서 미리 생성할 스레드를 지정한다.
         server.setExecutor(Executors.newFixedThreadPool(THREAD_POOL_SIZE));

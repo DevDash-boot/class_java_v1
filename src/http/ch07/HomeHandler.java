@@ -27,6 +27,7 @@ public class HomeHandler implements HttpHandler {
               <ul>
                 <li><a href="/health">서버 상태 확인</a></li>
                 <li><a href="/api/users">사용자 목록(JSON)</a></li>
+                <li><a href="/api/time">현재시각</a></li>
               </ul>
             </body>
             </html>
