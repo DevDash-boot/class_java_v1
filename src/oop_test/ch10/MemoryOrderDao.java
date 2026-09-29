@@ -1,0 +1,20 @@
+package oop_test.ch10;
+
+import java.util.ArrayList;
+import java.util.List;
+
+// 구현체 1 : 리스트에 저장하는 구현체
+public class MemoryOrderDao implements OrderDao {
+    private List<Order> orderList = new ArrayList<>();
+
+    @Override
+    public void insert(Order order) {
+        orderList.add(order);
+        System.out.println(order.getMenuName() + " 주문이 접수되었습니다.");
+    }
+
+    @Override
+    public List<Order> findAll() {
+        return orderList;
+    }
+}
